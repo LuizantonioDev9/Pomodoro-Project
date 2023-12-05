@@ -6,10 +6,6 @@ const resumeBtn = document.querySelector('#resumeBtn');
 const resetBtn = document.querySelector('#resetBtn');
 const title = document.getElementById("titulo");
 
-
-
-
-
 let interval;
 let minutes = 0;
 let seconds = 0;
@@ -20,7 +16,6 @@ startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
 resumeBtn.addEventListener('click', resumeTimer);
 resetBtn.addEventListener('click', resetTimer)
-
 
 function startTimer() {
     minutes = document.querySelector('#fnum').value;
