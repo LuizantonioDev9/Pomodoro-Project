@@ -4,7 +4,9 @@ const startBtn = document.querySelector('#startBtn');
 const pauseBtn = document.querySelector('#pauseBtn');
 const resumeBtn = document.querySelector('#resumeBtn');
 const resetBtn = document.querySelector('#resetBtn');
+const shortBrk = document.querySelector('#shortBrk');
 const title = document.getElementById("titulo");
+const title_h1 = document.getElementById("titulo_h1");
 
 let interval;
 let minutes = 0;
@@ -15,7 +17,22 @@ let finish = 0;
 startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
 resumeBtn.addEventListener('click', resumeTimer);
-resetBtn.addEventListener('click', resetTimer)
+resetBtn.addEventListener('click', resetTimer);
+shortBrk.addEventListener('click', shortBreak);
+
+pauseBtn.style.display = "block";
+startBtn.style.display = "block";
+resumeBtn.style.display = "none";
+shortBrk.style.display = "block";
+resetBtn.style.display = "none";
+
+
+
+function playSound() {
+    var mp3 = '<source src="alarm_clock_old.mp3" type="audio/mpeg">';
+    let audio = document.getElementById("sound");
+    audio.innerHTML = '<audio autoplay="autoplay">' + mp3 + "</audio>"; 
+}
 
 function startTimer() {
     minutes = document.querySelector('#fnum').value;
@@ -30,17 +47,16 @@ function startTimer() {
             if(seconds <= finish) {
                 
                 minutes--;
-                seconds = 59;
+                seconds = 2;
             }
 
-            if(minutes == -1) {
+            if(minutes <= -1) {
                 clearInterval(interval);
                 minutes = 0;
                 seconds = 0;
                 minutesEl.textContent = formatTimer(minutes);
                 secondsEl.textContent = formatTimer(seconds);
                 isPause = true;
-                window.location.reload(true);
                 if(window.Notification && Notification.permission !=="denied") {
                     Notification.requestPermission(function(status){
                         let notification = new Notification('Pomodoro Timer', {
@@ -49,24 +65,31 @@ function startTimer() {
                         });
                     })
                 }
-                
+                playSound(); 
+                pauseBtn.style.display = "none";
+                startBtn.style.display = "none";
+                resetBtn.style.display = "block";
             }
-
+            
             minutesEl.textContent = formatTimer(minutes);
             secondsEl.textContent = formatTimer(seconds);
             title.textContent = formatTimer(minutes);
             title.textContent += `:`
             title.textContent += formatTimer(seconds);
             title.textContent += ` - Time to focus`;
+            
         }
-
+        
     }, 1000);
-
             pauseBtn.style.display = "block";
             startBtn.style.display = "none";
             resumeBtn.style.display = "none";
+            shortBrk.style.display = "none";
             document.querySelector("#fnum").style.display = "none";
+            document.querySelector("#fnum1").style.display = "none";
             document.querySelector(".text-timer").style.display = "none";
+            document.querySelector(".text-timer1").style.display = "none";
+            document.getElementsByTagName('body').style.background = "#000000"
                    
 }
 
@@ -101,9 +124,68 @@ function resetTimer() {
     
 }
 
+function shortBreak() {
+    minutes = document.querySelector('#fnum1').value;
+    interval = setInterval(() => {
+
+        if(!isPause) {
+
+            
+            seconds -= 1;
+            console.log(minutes);
+
+            if(seconds <= finish) {
+                
+                minutes--;
+                seconds = 59;
+            }
+
+            if(minutes <= -1) {
+                clearInterval(interval);
+                minutes = 0;
+                seconds = 0;
+                minutesEl.textContent = formatTimer(minutes);
+                secondsEl.textContent = formatTimer(seconds);
+                isPause = true;
+                if(window.Notification && Notification.permission !=="denied") {
+                    Notification.requestPermission(function(status){
+                        let notification = new Notification('Pomodoro Timer', {
+                            body:'TIME TO BREAK',
+                            icon:'https://icons8.com.br/icon/GokNRZdD1mWz/tomate'
+                        });
+                    })
+                }
+                playSound(); 
+                pauseBtn.style.display = "none";
+                startBtn.style.display = "none";
+                resetBtn.style.display = "block";
+
+            }
+
+            minutesEl.textContent = formatTimer(minutes);
+            secondsEl.textContent = formatTimer(seconds);
+            title.textContent = formatTimer(minutes);
+            title.textContent += `:`
+            title.textContent += formatTimer(seconds);
+            title.textContent += ` - Time to focus`;
+            title_h1.textContent = 'Short Break Time'
+
+            
+        }
+
+    }, 1000);
+            pauseBtn.style.display = "block";
+            startBtn.style.display = "none";
+            resumeBtn.style.display = "none";
+            shortBrk.style.display = "none";
+            document.querySelector("#fnum1").style.display = "none";
+            document.querySelector("#fnum").style.display = "none";
+            document.querySelector(".text-timer").style.display = "none";
+            document.querySelector(".text-timer1").style.display = "none";
+                   
+}
+
 
 function formatTimer(time) {
     return time < 10 ? `0${time}` : time
 }
-
-
