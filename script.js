@@ -44,7 +44,7 @@ function startTimer() {
             if(seconds <= finish) {
                 
                 minutes--;
-                seconds = 2;
+                seconds = 59;
             }
 
             if(minutes <= -1) {
@@ -67,7 +67,6 @@ function startTimer() {
                 pauseBtn.style.display = "none";
                 startBtn.style.display = "none";
                 resetBtn.style.display = "block";
-                shortBrk.style.display = "none";
 
             }
             
@@ -85,7 +84,6 @@ function startTimer() {
             pauseBtn.style.display = "block";
             startBtn.style.display = "none";
             resumeBtn.style.display = "none";
-            shortBrk.style.display = "none";
             document.querySelector("#fnum").style.display = "none";
             document.querySelector("#fnum1").style.display = "none";
             document.querySelector(".text-timer").style.display = "none";
