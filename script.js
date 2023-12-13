@@ -6,6 +6,7 @@ const resumeBtn = document.querySelector('#resumeBtn');
 const resetBtn = document.querySelector('#resetBtn');
 const title = document.getElementById("titulo");
 const title_h1 = document.getElementById("titulo_h1");
+const timerTitulo = document.querySelector(".text-timer");
 
 let interval;
 let minutes = 0;
@@ -86,8 +87,7 @@ function startTimer() {
             resumeBtn.style.display = "none";
             document.querySelector("#fnum").style.display = "none";
             document.querySelector("#fnum1").style.display = "none";
-            document.querySelector(".text-timer").style.display = "none";
-            document.querySelector(".text-timer1").style.display = "none";
+            timerTitulo.style.display = "none";
             document.getElementsByTagName('body').style.background = "#000000"
                    
 }
