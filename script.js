@@ -66,9 +66,12 @@ function startTimer() {
                     })
                 }
                 playSound(); 
+                shortBreak();
                 pauseBtn.style.display = "none";
                 startBtn.style.display = "none";
                 resetBtn.style.display = "block";
+                shortBrk.style.display = "none";
+
             }
             
             minutesEl.textContent = formatTimer(minutes);
@@ -78,7 +81,8 @@ function startTimer() {
             title.textContent += formatTimer(seconds);
             title.textContent += ` - Time to focus`;
             
-        }
+        } 
+
         
     }, 1000);
             pauseBtn.style.display = "block";
@@ -125,7 +129,7 @@ function resetTimer() {
 }
 
 function shortBreak() {
-    minutes = document.querySelector('#fnum1').value;
+    minutes = 5;
     interval = setInterval(() => {
 
         if(!isPause) {
@@ -181,7 +185,7 @@ function shortBreak() {
             document.querySelector("#fnum1").style.display = "none";
             document.querySelector("#fnum").style.display = "none";
             document.querySelector(".text-timer").style.display = "none";
-            document.querySelector(".text-timer1").style.display = "none";
+            document.querySelector(".text-timer1    ").style.display = "none";
                    
 }
 
