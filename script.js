@@ -193,3 +193,6 @@ function shortBreak() {
 function formatTimer(time) {
     return time < 10 ? `0${time}` : time
 }
+
+alert ("test");
+print('teste')
