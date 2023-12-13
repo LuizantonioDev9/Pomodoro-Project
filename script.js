@@ -4,7 +4,6 @@ const startBtn = document.querySelector('#startBtn');
 const pauseBtn = document.querySelector('#pauseBtn');
 const resumeBtn = document.querySelector('#resumeBtn');
 const resetBtn = document.querySelector('#resetBtn');
-const shortBrk = document.querySelector('#shortBrk');
 const title = document.getElementById("titulo");
 const title_h1 = document.getElementById("titulo_h1");
 
@@ -18,12 +17,10 @@ startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
 resumeBtn.addEventListener('click', resumeTimer);
 resetBtn.addEventListener('click', resetTimer);
-shortBrk.addEventListener('click', shortBreak);
 
 pauseBtn.style.display = "block";
 startBtn.style.display = "block";
 resumeBtn.style.display = "none";
-shortBrk.style.display = "block";
 resetBtn.style.display = "none";
 
 
@@ -128,71 +125,7 @@ function resetTimer() {
     
 }
 
-function shortBreak() {
-    minutes = 5;
-    interval = setInterval(() => {
-
-        if(!isPause) {
-
-            
-            seconds -= 1;
-            console.log(minutes);
-
-            if(seconds <= finish) {
-                
-                minutes--;
-                seconds = 59;
-            }
-
-            if(minutes <= -1) {
-                clearInterval(interval);
-                minutes = 0;
-                seconds = 0;
-                minutesEl.textContent = formatTimer(minutes);
-                secondsEl.textContent = formatTimer(seconds);
-                isPause = true;
-                if(window.Notification && Notification.permission !=="denied") {
-                    Notification.requestPermission(function(status){
-                        let notification = new Notification('Pomodoro Timer', {
-                            body:'TIME TO BREAK',
-                            icon:'https://icons8.com.br/icon/GokNRZdD1mWz/tomate'
-                        });
-                    })
-                }
-                playSound(); 
-                pauseBtn.style.display = "none";
-                startBtn.style.display = "none";
-                resetBtn.style.display = "block";
-
-            }
-
-            minutesEl.textContent = formatTimer(minutes);
-            secondsEl.textContent = formatTimer(seconds);
-            title.textContent = formatTimer(minutes);
-            title.textContent += `:`
-            title.textContent += formatTimer(seconds);
-            title.textContent += ` - Time to focus`;
-            title_h1.textContent = 'Short Break Time'
-
-            
-        }
-
-    }, 1000);
-            pauseBtn.style.display = "block";
-            startBtn.style.display = "none";
-            resumeBtn.style.display = "none";
-            shortBrk.style.display = "none";
-            document.querySelector("#fnum1").style.display = "none";
-            document.querySelector("#fnum").style.display = "none";
-            document.querySelector(".text-timer").style.display = "none";
-            document.querySelector(".text-timer1    ").style.display = "none";
-                   
-}
-
-
 function formatTimer(time) {
     return time < 10 ? `0${time}` : time
 }
 
-alert ("test");
-print('teste')
